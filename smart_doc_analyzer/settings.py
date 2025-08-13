@@ -15,7 +15,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'unsafe-default-key')
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 # Allowed hosts
-ALLOWED_HOSTS = ['docmage.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['docmage-ciej.onrender.com', 'localhost', '127.0.0.1']
+
 
 # Installed apps
 INSTALLED_APPS = [
