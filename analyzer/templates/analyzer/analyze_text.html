@@ -1,0 +1,70 @@
+{% extends 'analyzer/base.html' %}
+{% block content %}
+<div class="upload-container">
+    <h2>Analyze Text Directly</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_text">Text</label>
+            {{ form.text }}
+        </div>
+        <div class="form-group">
+            <label for="id_category">Category</label>
+            {{ form.category }}
+        </div>
+        <button type="submit" class="submit-btn">Analyze</button>
+    </form>
+</div>
+
+{% if result %}
+<div class="detail-container">
+    <h3>Key Highlights</h3>
+    <div class="highlight-section">
+        {% if result.highlights %}
+            <ul class="entity-list">
+                {% for key, value in result.highlights.items %}
+                    <li class="entity-item"><strong>{{ key }}:</strong> {{ value }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="entity-item empty">No highlights found.</p>
+        {% endif %}
+    </div>
+
+    <h3>Overview</h3>
+    <div class="summary-box">
+        {% if result.overview %}
+            <p>{{ result.overview }}</p>
+        {% else %}
+            <p>No overview available.</p>
+        {% endif %}
+    </div>
+
+    <h3>Key Points</h3>
+    <div class="summary-box">
+        {% if result.key_points %}
+            <ul>
+                {% for point in result.key_points %}
+                    <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No key points available.</p>
+        {% endif %}
+    </div>
+
+    <h3>Insights</h3>
+    <div class="summary-box">
+        {% if result.insights %}
+            <ul>
+                {% for insight in result.insights %}
+                    <li>{{ insight }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No insights available.</p>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

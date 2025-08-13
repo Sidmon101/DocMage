@@ -1,0 +1,64 @@
+{% extends 'analyzer/base.html' %}
+{% block content %}
+<div class="detail-container">
+    <h2>{{ document.title }}</h2>
+    <p><strong>Type:</strong> {{ document.doc_type }}</p>
+    <p><strong>Category:</strong> {{ document.category|title }}</p>
+    <p><strong>Uploaded:</strong> {{ document.uploaded_at|date:"F j, Y, g:i a" }}</p>
+
+    <h3>Raw Text</h3>
+    <div class="raw-text">
+        <pre>{{ raw_text|escape }}</pre>
+    </div>
+
+    <h3>Key Highlights</h3>
+    <div class="highlight-section">
+        {% if highlights %}
+            <ul class="entity-list">
+                {% for key, value in highlights.items %}
+                    <li class="entity-item"><strong>{{ key }}:</strong> {{ value }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="entity-item empty">No highlights available.</p>
+        {% endif %}
+    </div>
+
+    <h3>Overview</h3>
+    <div class="summary-box">
+        {% if overview %}
+            <p>{{ overview }}</p>
+        {% else %}
+            <p>No overview available.</p>
+        {% endif %}
+    </div>
+
+    <h3>Key Points</h3>
+    <div class="summary-box">
+        {% if key_points %}
+            <ul>
+                {% for point in key_points %}
+                    <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No key points available.</p>
+        {% endif %}
+    </div>
+
+    <h3>Insights</h3>
+    <div class="summary-box">
+        {% if insights %}
+            <ul>
+                {% for insight in insights %}
+                    <li>{{ insight }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No insights available.</p>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'download_summary_pdf' document.id %}" class="download-btn">Download Summary as PDF</a>
+</div>
+{% endblock %}

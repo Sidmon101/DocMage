@@ -1,0 +1,13 @@
+{% extends 'analyzer/base.html' %}
+
+{% block content %}
+<div class="home-container">
+    <h1>Welcome to Smart Document Analyzer</h1>
+    <p>This tool helps you upload, analyze, and extract insights from your documents using natural language processing.</p>
+    <div class="home-actions">
+        <a href="{% url 'upload_document' %}" class="action-btn">Upload Document</a>
+        <a href="{% url 'document_list' %}" class="action-btn">View Documents</a>
+        <a href="{% url 'analyze_text' %}" class="action-btn">Analyze Text</a> <!-- New button -->
+    </div>
+</div>
+{% endblock %}
